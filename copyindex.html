@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!--<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>-->
+
+	<link rel="stylesheet" href="foundation.css" type="text/css" />
+	<link rel="stylesheet" href="app.css" type="text/css" />
+	<meta charset="UTF-8">
+	<title>Air Quality AIP</title>
+</head>
+<body>
+	<div class="row">
+		<div class="small-12 column">
+			<div class='callout secondary text-center'><h1>Historical Weather APP</h1></div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="column small-12">
+			<ul class='button-group'>
+			
+			<li><a href="#" id='heatMapBtn' class="button alert">Heat Map</a></li>
+			<li><a href="#" id='setMarkerBtn' class="button">Set Markers</a></li>
+			<li><a href="#" id='hideMarkerBtn' class="button secondary">Hide Markers</a></li>
+			<li><a href="#" id='deleteMarkerBtn' class="button secondary">Delete Markers</a></li>
+			<li><a href="#" id='tempBtn' class="button warning">Temp</a></li>
+			<li><a href="#" id='precipMapBtn' class="button success">Precip</a></li>
+			<li><a href="#" id='roadBtn' class="button warning">Road Map</a></li>
+			<li><a href="#" id='terrainBtn' class="button success">Terrain Map</a></li>
+			
+			</ul>
+
+		</div>
+	</div>
+	
+	<div class="row">
+		
+		<div class="small-12 column">
+			<div id='map'></div>
+    	</div>
+
+	</div>
+	
+	<div class="row">
+		<div class="column 12-small text-center">
+			<h4 id='CityState'></h4>
+		</div>
+	</div>
+	
+<!--       MAIN INFO!!   !!!!!!!!     -->
+
+
+<div class="row"><!-- this is a huge row/column to hold the data -->
+	<div class="column small-12">
+		
+<!-- this is a row with three columns for time, ehader, and Icon -->
+		<div  id='topInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>TIME:</h5>
+					<div id='dataTime' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>Summary:</h5>
+					<div id='dataHeader' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>Icon:</h5>
+					<div id='dataIcon' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is a row with three columns for time, ehader, and Icon -->
+
+
+<!-- this is the second row with three columns for sunrise, sunset, moon -->
+		<div  id='topInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>Sunrise:</h5>
+					<div id='dataSunRise' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>sunset:</h5>
+					<div id='dataSunSet' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-4 moonDataBox">
+				<div class="row">
+					<div class="moonIcon"></div>
+					<h5>Moon phase:</h5>
+					<div id='dataMoonPerc' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is second row with three columns for sunrise, sunset, moon -->
+
+<!-- this is the third row with three columns for rain index, max, chance % -->
+		<div  id='topInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>Rain Index:</h5>
+					<div id='dataRainIndex' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>max Rain:</h5>
+					<div id='dataRainMax' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-4">
+				<div class="row">
+					<h5>% rain:</h5>
+					<div id='dataRainChance' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is the third row with three columns for rain index, max, chance % -->
+
+<!-- this is the 4th row with four columns for Teemp low, time of low, high temp, high time -->
+		<div  id='bottomInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Todays Low:</h5>
+					<div id='dataTempLow' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>time of Low:</h5>
+					<div id='dataTempLowTime' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Todays High:</h5>
+					<div id='dataTempHigh' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 4 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Time of High:</h5>
+					<div id='dataTempHighTime' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is the 4th row with four columns for Teemp low, time of low, high temp, high time -->
+
+<!-- this is the 5th row with four columns for dewPoint, Humidity, windSpeed, WindDirrection -->
+		<div  id='bottomInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Dew Point:</h5>
+					<div id='dataDewPoint' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Humidity:</h5>
+					<div id='dataHumidity' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Wind Speed:</h5>
+					<div id='dataWindSpeed' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 4 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Wind Dirrection:</h5>
+					<div id='dataWindDirrection' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is the 5th row with four columns for dewPoint, Humidity, windSpeed, WindDirrection -->
+
+<!-- this is the 6th row with four columns for Vis, Cloud%, Preassure, Sun Index, Humidity, windSpeed, WindDirrection -->
+		<div  id='bottomInfo' class="row">
+			<!-- column 1 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Visibility:</h5>
+					<div id='dataVisibility' class="column small-12">
+					</div>
+				</div>
+			</div>
+		<!-- column 2 time -->
+			<div class="column small-3">
+				<div class="row">
+					<h5>Cloud Cover:</h5>
+					<div id='dataCloudCover' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 3 time -->
+			<div class="column small-3">
+				<div class="row">
+					Preasure
+					<div id='dataPreassure' class="column small-12">
+					</div>
+				</div>
+			</div>
+			<!-- column 4 time -->
+			<div class="column small-3">
+				<div class="row">
+					Sun Index
+					<div id='dataSunIndex' class="column small-12">
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- this is the 6th row with four columns for Vis, Cloud%, Preassure, Sun Index, Humidity, windSpeed, WindDirrection -->
+
+
+
+
+
+	</div>
+</div><!-- this is a huge row/column to hold the data -->
+
+          <!--   Hidden Inputs for Lat and Lng      -->
+		<div class="row">
+			<div id="lat"><input type="hidden"/></div>	
+		</div>
+		<div class="row">
+			<div id="lng"><input type="hidden"/></div>
+		</div>
+	<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="app.js"></script>	
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJ7LXGgSJMXsYIDS_ppZWxndjoJGOtWY&callback=initMap&libraries=visualization"
+    async defer></script>
+    
+</body>
+
+</html>
+

@@ -1,0 +1,33 @@
+      #map {
+        height: 350px;
+        /*width: 800px;*/
+        border:1px solid black;
+      }
+      
+      .headers{
+          
+      }
+      
+      #topInfo{
+        font-size: 40px;
+      }
+      
+      #bottomInfo{
+        font-size: 20px;
+      }
+      
+      
+      
+      .moonDataBox{
+ height: 100%;
+}
+
+.moonIcon {
+  width: 10rem;
+  height: 10rem;
+  background: #0a0a0a;
+  margin: 1rem auto;
+  border-radius: 50%;
+  /*box-shadow: inset 0rem 0 whitesmoke;*/
+  transform: rotate(-10deg);
+}
